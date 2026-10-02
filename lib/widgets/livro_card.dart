@@ -13,6 +13,7 @@ class LivroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
+      onTap: onTap,
       label:
           'Ver detalhes de ${livro.titulo}, de ${livro.autor}. '
           '${livro.status.rotulo}',

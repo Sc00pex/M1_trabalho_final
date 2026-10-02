@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minha_estante/app.dart';
 import 'package:minha_estante/models/livro.dart';
+import 'package:minha_estante/widgets/livro_card.dart';
 
 const _gerarEvidencias = bool.fromEnvironment('GERAR_EVIDENCIAS');
 final _capturaKey = GlobalKey();
@@ -205,7 +206,12 @@ void main() {
         await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
         await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
         await expectLater(tester, meetsGuideline(textContrastGuideline));
-        await tester.tap(find.textContaining('Um título bem comprido').first);
+        final node = tester.getSemantics(find.byType(LivroCard).first);
+        expect(
+          node.getSemanticsData().hasAction(ui.SemanticsAction.tap),
+          isTrue,
+        );
+        node.owner!.performAction(node.id, ui.SemanticsAction.tap);
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
         await _pressionar(tester, 'Editar livro');

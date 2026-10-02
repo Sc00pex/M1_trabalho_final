@@ -227,7 +227,7 @@ def main():
     paragrafo('<b>Figuras E1 e E2.</b> A mesma coleção no espaço estreito e no espaço largo. O botão de adicionar fica na área inferior do Scaffold, acima da qual aparece a mensagem de confirmação. A interface não registrou exceção de overflow.', size=9)
     subtitulo('Acessibilidade efetivamente verificada')
     paragrafo('Os testes executaram androidTapTargetGuideline, labeledTapTargetGuideline e textContrastGuideline no estado vazio e na coleção, nos dois tamanhos. As verificações passaram. Os textos também foram ampliados a 200% com título e autor longos; lista, detalhe e formulário continuaram acessíveis por rolagem.', size=9.5)
-    paragrafo('Na figura E1, o cartão tem rótulo semântico com título, autor e leitura. Na figura C2, os campos têm rótulos permanentes. Botões têm texto e áreas de toque verificadas. As cores vêm de um tema Material 3. Não foi feita avaliação manual com TalkBack em dispositivo físico.', size=9.5)
+    paragrafo('Na figura E1, o cartão tem rótulo semântico com título, autor e leitura. O teste também abre o detalhe pela ação semântica de toque do cartão. Na figura C2, os campos têm rótulos permanentes. Botões têm texto e áreas de toque verificadas. As cores vêm de um tema Material 3. Não foi feita avaliação manual com TalkBack em dispositivo físico.', size=9.5)
 
     pagina('Organização e qualidade', 7)
     subtitulo('5. Estrutura e componentização')
