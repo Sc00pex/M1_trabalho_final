@@ -34,7 +34,10 @@ def ler_log(nome):
 
 
 def git(*args):
-    return subprocess.check_output(['git', *args], cwd=ROOT, text=True).strip()
+    return subprocess.check_output(
+        ['git', '-c', f'safe.directory={ROOT.as_posix()}', *args],
+        cwd=ROOT, text=True,
+    ).strip()
 
 
 def main():
