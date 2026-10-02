@@ -54,7 +54,8 @@ def main():
     if not apk.is_file():
         raise SystemExit('O APK não foi encontrado.')
     sha_apk = hashlib.sha256(apk.read_bytes()).hexdigest()
-    commit = git('rev-parse', 'HEAD')
+    tag = 'm1-v1.0.0'
+    commit = git('rev-parse', f'{tag}^{{commit}}')
     flutter = re.search(r'Flutter ([\d.]+)', versao).group(1)
     dart = re.search(r'Dart ([\d.]+)', versao).group(1)
     tamanho_apk = apk.stat().st_size / (1024 * 1024)
@@ -65,12 +66,13 @@ def main():
         'turma_informada': '4º período',
         'data': '2026-10-02',
         'commit': commit,
+        'tag': tag,
         'flutter': flutter,
         'dart': dart,
         'apk': 'build/app/outputs/flutter-apk/app-release.apk',
         'sha256_apk': sha_apk,
         'evidencias': 'Capturas da renderização em testes de widget; não de um aparelho.',
-        'repositorio_remoto': None,
+        'repositorio_remoto': 'https://github.com/Sc00pex/M1_trabalho_final.git',
     }
     (OUT / 'versao.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding='utf-8')
 
@@ -159,10 +161,10 @@ def main():
 
     pagina('Versão e requisitos', 2)
     subtitulo('2. Repositório, versão e execução')
-    paragrafo(f'<b>Versão:</b> 1.0.0+1 · Flutter {flutter} · Dart {dart}<br/><b>Commit do projeto:</b> {commit}<br/><b>Repositório local:</b> entrega/minha-estante.bundle.<br/><b>Endereço remoto:</b> não informado; o link HTTPS deverá ser acrescentado após publicar o repositório.', size=9, gap=8)
+    paragrafo(f'<b>Versão:</b> 1.0.0+1 · Flutter {flutter} · Dart {dart}<br/><b>Tag dos fontes e evidências:</b> {tag}<br/><b>Commit do projeto:</b> {commit}<br/><b>Repositório:</b> <link href="https://github.com/Sc00pex/M1_trabalho_final" color="#295B46">https://github.com/Sc00pex/M1_trabalho_final</link><br/><b>Cópia local:</b> entrega/minha-estante.bundle.', size=9, gap=8)
     paragrafo(f'<b>Artefato Android:</b> app-release.apk, APK release, {tamanho_apk:.1f} MiB. Geração confirmada no log de build. Assinado com chave de desenvolvimento, para instalação e avaliação. Android mínimo: 7.0 (API 24).', size=9, gap=8)
-    codigo('git clone entrega/minha-estante.bundle minha_estante\ncd minha_estante\nflutter pub get\nflutter analyze\nflutter test\nflutter run\nflutter build apk --release', size=8)
-    paragrafo('É preciso ter Flutter e Android SDK configurados e as licenças Android aceitas. O commit identifica os fontes, testes, capturas e logs usados aqui; o hash SHA-256 do APK está em relatorio/versao.json. A cópia Git permite reproduzir a versão sem credenciais.', size=8.5, gap=8)
+    codigo(f'git clone https://github.com/Sc00pex/M1_trabalho_final.git\ncd M1_trabalho_final\ngit checkout {tag}\nflutter pub get\nflutter analyze\nflutter test\nflutter run\nflutter build apk --release', size=8)
+    paragrafo('É preciso ter Flutter e Android SDK configurados e as licenças Android aceitas. A tag identifica os fontes, testes, capturas e logs usados aqui. O PDF e o registro de versão são incluídos depois, em um commit de documentação. O SHA-256 do APK está em relatorio/versao.json. A cópia Git também permite reproduzir a versão.', size=8.5, gap=8)
     subtitulo('3. Matriz dos 13 critérios')
     linhas = [
         ('1', 'Identificação, objetivo e fluxo', 'p. 1, seção 1', 'README.md; app.dart'),

@@ -16,6 +16,14 @@ Os dados ficam na memória durante a execução. Ao fechar e abrir novamente o a
 
 ## Executar
 
+Repositório: [Sc00pex/M1_trabalho_final](https://github.com/Sc00pex/M1_trabalho_final). A versão de código e evidências usada no relatório é identificada pela tag `m1-v1.0.0`.
+
+```sh
+git clone https://github.com/Sc00pex/M1_trabalho_final.git
+cd M1_trabalho_final
+git checkout m1-v1.0.0
+```
+
 Versão usada na entrega: Flutter 3.47.6 e Dart 3.13.5. Para Android, é necessário configurar o Android SDK e aceitar suas licenças. A versão mínima do aplicativo é Android 7.0 (API 24).
 
 ```sh
@@ -84,11 +92,12 @@ O relatório tem oito páginas, incluindo a identificação, os 13 critérios e 
 - Ícones Material e fonte Roboto incluídos no Flutter; nenhuma imagem externa de capa de livro.
 - Assistência do Codex na elaboração do código, testes, documentação e relatório. A identificação do estudante e o tema foram fornecidos por Kayann.
 
-O repositório remoto não foi informado. A entrega inclui o código e uma cópia transportável do repositório Git local, `entrega/minha-estante.bundle`, com a versão identificada no relatório. Para reproduzir a partir dessa cópia:
+A entrega também inclui uma cópia transportável do repositório Git, `entrega/minha-estante.bundle`, com a versão identificada no relatório. Para reproduzir a partir dessa cópia:
 
 ```sh
 git clone entrega/minha-estante.bundle minha_estante
 cd minha_estante
+git checkout m1-v1.0.0
 flutter pub get
 flutter analyze
 flutter test
