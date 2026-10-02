@@ -15,16 +15,19 @@ Fluxo principal. A tela inicial mostra a coleção. Ao tocar em um livro, abre-s
 
 Escopo do M1. Estão implementados lista dinâmica, estado vazio, detalhe, criação, edição, validação, tema e adaptação de layout. Os dados ficam no estado local durante a execução. Salvar os livros entre sessões seria uma evolução futura e não faz parte desta entrega.
 
-Sobre as evidências. As figuras foram geradas pelo renderer do Flutter nos testes de widget. Os tamanhos indicados são pixels lógicos. Não são capturas de um celular ou emulador. O APK foi compilado separadamente.
-
 
 # Versão e requisitos
 
 2. Repositório, versão e execução
 
-Versão: 1.0.0+1 · Flutter 3.47.6 · Dart 3.13.5Tag dos fontes e evidências: m1-v1.0.0Commit do projeto: 255975aae308f7b52546ac90fab8f744c65868e6Repositório: https://github.com/Sc00pex/M1_trabalho_finalCópia local: entrega/minha-estante.bundle.
-
-Artefato Android: app-release.apk, APK release, 47.5 MiB. Geração confirmada no log de build. Assinado com chave de desenvolvimento, para instalação e avaliação. Android mínimo: 7.0 (API 24).
+| Campo | Informação |
+|---|---|
+| Repositório | https://github.com/Sc00pex/M1_trabalho_final |
+| Tag ou hash | m1-v1.0.0 · 255975aae308f7b52546ac90fab8f744c65868e6 |
+| Flutter | 3.47.6 |
+| Dart | 3.13.5 |
+| Artefato Android | app-release.apk — APK release, 47.5 MiB. · Geração confirmada em relatorio/logs/build.txt. |
+Como reproduzir. Configure Flutter e Android SDK e aceite as licenças Android. Clone o repositório, selecione a tag e execute os comandos abaixo para obter as dependências, analisar, testar, executar e gerar o APK. Android mínimo: 7.0 (API 24).
 
 ```text
 git clone https://github.com/Sc00pex/M1_trabalho_final.git
@@ -37,7 +40,7 @@ flutter run
 flutter build apk --release
 ```
 
-É preciso ter Flutter e Android SDK configurados e as licenças Android aceitas. A tag identifica os fontes, testes, capturas e logs usados aqui. O PDF e o registro de versão são incluídos depois, em um commit de documentação. O SHA-256 do APK está em relatorio/versao.json. A cópia Git também permite reproduzir a versão.
+Verificação da versão. A tag e o hash acima identificam os fontes, testes, imagens e logs usados neste relatório. O PDF e relatorio/versao.json são incluídos depois, em um commit de documentação. O registro contém o SHA-256 do APK. A cópia entrega/minha-estante.bundle também permite reproduzir a versão.
 
 3. Matriz dos 13 critérios
 

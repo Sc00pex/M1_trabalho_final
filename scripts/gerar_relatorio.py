@@ -88,14 +88,11 @@ def main():
             pdf.showPage()
         pdf.setFillColor(GREEN)
         pdf.rect(0, H - 10, W, 10, fill=1, stroke=0)
-        pdf.setFont('Helvetica', 9)
-        pdf.drawString(M, H - 34, 'MINHA ESTANTE  /  DESENVOLVIMENTO MOBILE I')
         pdf.setFillColor(INK)
         pdf.setFont('Helvetica-Bold', 20)
         pdf.drawString(M, H - 70, titulo)
         pdf.setFont('Helvetica', 8)
         pdf.setFillColor(colors.HexColor('#5E6C63'))
-        pdf.drawString(M, 25, 'Kayann Leandro de Sá  •  RA 0031623  •  02/10/2026')
         pdf.drawRightString(W - M, 25, f'{numero} / 8')
         y = H - 94
         md.append(f'\n# {titulo}\n')
@@ -157,14 +154,40 @@ def main():
     paragrafo('<b>Domínio e problema.</b> Minha Estante é um catálogo pessoal de livros. A ideia é reunir, em um lugar simples, o que a pessoa quer ler, está lendo ou já leu, junto com pequenas anotações. O público é quem gosta de ler e quer acompanhar suas leituras sem preencher um cadastro complicado.')
     paragrafo('<b>Fluxo principal.</b> A tela inicial mostra a coleção. Ao tocar em um livro, abre-se o detalhe daquele item. O botão Adicionar livro leva ao formulário de criação; Editar livro, no detalhe, abre o mesmo formulário com os dados preenchidos. Depois de salvar a edição, o detalhe é atualizado. Ao voltar à lista, o cartão também mostra a mudança.')
     paragrafo('<b>Escopo do M1.</b> Estão implementados lista dinâmica, estado vazio, detalhe, criação, edição, validação, tema e adaptação de layout. Os dados ficam no estado local durante a execução. Salvar os livros entre sessões seria uma evolução futura e não faz parte desta entrega.')
-    paragrafo('<b>Sobre as evidências.</b> As figuras foram geradas pelo renderer do Flutter nos testes de widget. Os tamanhos indicados são pixels lógicos. Não são capturas de um celular ou emulador. O APK foi compilado separadamente.', size=9.5)
 
     pagina('Versão e requisitos', 2)
     subtitulo('2. Repositório, versão e execução')
-    paragrafo(f'<b>Versão:</b> 1.0.0+1 · Flutter {flutter} · Dart {dart}<br/><b>Tag dos fontes e evidências:</b> {tag}<br/><b>Commit do projeto:</b> {commit}<br/><b>Repositório:</b> <link href="https://github.com/Sc00pex/M1_trabalho_final" color="#295B46">https://github.com/Sc00pex/M1_trabalho_final</link><br/><b>Cópia local:</b> entrega/minha-estante.bundle.', size=9, gap=8)
-    paragrafo(f'<b>Artefato Android:</b> app-release.apk, APK release, {tamanho_apk:.1f} MiB. Geração confirmada no log de build. Assinado com chave de desenvolvimento, para instalação e avaliação. Android mínimo: 7.0 (API 24).', size=9, gap=8)
+    dados_versao = [
+        ('Repositório', '<link href="https://github.com/Sc00pex/M1_trabalho_final" color="#295B46">https://github.com/Sc00pex/M1_trabalho_final</link>'),
+        ('Tag ou hash', f'{tag}<br/>{commit}'),
+        ('Flutter', flutter),
+        ('Dart', dart),
+        ('Artefato Android', f'app-release.apk — APK release, {tamanho_apk:.1f} MiB.<br/>Geração confirmada em relatorio/logs/build.txt.'),
+    ]
+    estilo_rotulo = ParagraphStyle('rotulo_versao', fontName='Helvetica-Bold', fontSize=9, leading=12)
+    estilo_valor = ParagraphStyle('valor_versao', fontName='Helvetica', fontSize=9, leading=12)
+    tabela_versao = Table([
+        [Paragraph(rotulo, estilo_rotulo), Paragraph(valor, estilo_valor)]
+        for rotulo, valor in dados_versao
+    ], colWidths=[130, CW - 130])
+    tabela_versao.setStyle(TableStyle([
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 0),
+        ('RIGHTPADDING', (0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 2),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+        ('LINEABOVE', (0, 0), (-1, 0), 0.6, INK),
+        ('LINEBELOW', (0, -1), (-1, -1), 0.6, INK),
+    ]))
+    _, altura_versao = tabela_versao.wrap(CW, H)
+    tabela_versao.drawOn(pdf, M, y - altura_versao)
+    y -= altura_versao + 10
+    md.append('| Campo | Informação |\n|---|---|')
+    md.extend('| ' + rotulo + ' | ' + re.sub(r'<[^>]+>', '', valor.replace('<br/>', ' · ')) + ' |'
+              for rotulo, valor in dados_versao)
+    paragrafo('<b>Como reproduzir.</b> Configure Flutter e Android SDK e aceite as licenças Android. Clone o repositório, selecione a tag e execute os comandos abaixo para obter as dependências, analisar, testar, executar e gerar o APK. Android mínimo: 7.0 (API 24).', size=8.5, gap=6)
     codigo(f'git clone https://github.com/Sc00pex/M1_trabalho_final.git\ncd M1_trabalho_final\ngit checkout {tag}\nflutter pub get\nflutter analyze\nflutter test\nflutter run\nflutter build apk --release', size=8)
-    paragrafo('É preciso ter Flutter e Android SDK configurados e as licenças Android aceitas. A tag identifica os fontes, testes, capturas e logs usados aqui. O PDF e o registro de versão são incluídos depois, em um commit de documentação. O SHA-256 do APK está em relatorio/versao.json. A cópia Git também permite reproduzir a versão.', size=8.5, gap=8)
+    paragrafo('<b>Verificação da versão.</b> A tag e o hash acima identificam os fontes, testes, imagens e logs usados neste relatório. O PDF e relatorio/versao.json são incluídos depois, em um commit de documentação. O registro contém o SHA-256 do APK. A cópia entrega/minha-estante.bundle também permite reproduzir a versão.', size=8.5, gap=8)
     subtitulo('3. Matriz dos 13 critérios')
     linhas = [
         ('1', 'Identificação, objetivo e fluxo', 'p. 1, seção 1', 'README.md; app.dart'),
