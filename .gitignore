@@ -12,7 +12,3 @@ android/key.properties
 *.keystore
 __pycache__/
 entrega/
-relatorio/relatorio_final.pdf
-relatorio/relatorio_final.md
-relatorio/versao.json
-relatorio/previews/
